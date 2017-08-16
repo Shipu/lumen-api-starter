@@ -15,6 +15,8 @@ return [
 
     'version' => env('APP_VERSION', 'unknown'),
 
+    'debug' => env('APP_DEBUG', false),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

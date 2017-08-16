@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class Handler extends ExceptionHandler
+class Kernel extends ExceptionHandler
 {
     /**
      * A list of the exception types that should not be reported.
@@ -45,6 +45,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        foreach (app('config')->get('exceptions') as $exception => $handler) {
+            if ($exception == "*" || $exception = get_class($e)) {
+                if ($error = (new $handler($request, $e))->render()) {
+                    return $error;
+                }
+            }
+        }
+
         return parent::render($request, $e);
     }
 }

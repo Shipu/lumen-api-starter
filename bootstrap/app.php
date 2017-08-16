@@ -39,6 +39,7 @@ foreach ([
     // 'cache',
     // 'cors,'
     // 'database',
+    "exceptions",
     // 'queue',
     // 'view',
 ] as $file) {
@@ -62,7 +63,7 @@ foreach ([
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+    App\Exceptions\Kernel::class
 );
 
 $app->singleton(
