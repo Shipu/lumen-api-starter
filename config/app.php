@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'middlwares' => [
+    'middlewares' => [
         // App\Http\Middleware\ExampleMiddleware::class
         Barryvdh\Cors\HandleCors::class,
     ],
