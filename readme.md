@@ -2,6 +2,9 @@
 
 A starter project to develop API with Lumen 5.4.
 
+The starter project has been updated and this is **version 2.0**. This is completely rewritten from the scratch and removed a few packages from the older version.
+If you want to see the **version 1.0** then checkout [v1.0 branch](https://github.com/munza/lumen-api-starter/tree/v1.0).
+
 ### Included Packages
 - [filp/whoops@^2.1](https://github.com/filp/whoops)
 - [tymon/jwt-auth@1.0.0-beta.3](https://github.com/tymondesigns/jwt-auth)
