@@ -39,7 +39,8 @@ foreach ([
     // 'cache',
     // 'cors,'
     'database',
-    "exceptions",
+    'exceptions',
+    'jwt',
     // 'queue',
     // 'view',
 ] as $file) {

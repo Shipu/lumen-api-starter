@@ -72,6 +72,7 @@ return [
         // App\Providers\EventServiceProvider::class => 'all',
 
         Barryvdh\Cors\ServiceProvider::class => 'all',
+        Tymon\JWTAuth\Providers\LumenServiceProvider::class => 'all',
         Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class => ['development', 'local'],
     ],
 
@@ -88,7 +89,6 @@ return [
     */
 
     'middlewares' => [
-        // App\Http\Middleware\ExampleMiddleware::class
         Barryvdh\Cors\HandleCors::class,
     ],
 

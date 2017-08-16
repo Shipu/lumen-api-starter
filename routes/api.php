@@ -19,3 +19,12 @@ $app->group(['prefix' => 'api'], function () use ($app) {
         ];
     });
 });
+
+$app->group(['prefix' => 'api', 'middleware' => 'jwt.auth'], function () use ($app) {
+    $app->get('/protected', function () use ($app) {
+        return [
+            "app" => config('app.name'),
+            "version" => config('app.version'),
+        ];
+    });
+});
