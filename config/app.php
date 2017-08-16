@@ -94,5 +94,6 @@ return [
 
     'routeMiddlewares' => [
         // 'auth' => App\Http\Middleware\Authenticate::class,
+        'cors' => \Barryvdh\Cors\HandleCors::class,
     ],
 ];
