@@ -81,14 +81,9 @@ $app->singleton(
 |
 */
 
-$app->middleware([
-   // App\Http\Middleware\ExampleMiddleware::class
-    Barryvdh\Cors\HandleCors::class,
-]);
+$app->middleware(app('config')->get('app.middlewares'));
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware(app('config')->get('app.routeMiddlewares'));
 
 /*
 |--------------------------------------------------------------------------
@@ -101,19 +96,8 @@ $app->middleware([
 |
 */
 
-foreach ([
-    // App\Providers\AppServiceProvider::class,
-    // App\Providers\AuthServiceProvider::class,
-    // App\Providers\EventServiceProvider::class,
-    Barryvdh\Cors\ServiceProvider::class,
-] as $provider) {
-    $app->register($provider);
-}
-
-if (in_array($app->environment(), ['development', 'local'])) {
-    foreach ([
-        Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class
-    ] as $provider) {
+foreach (app('config')->get('app.providers') as $provider => $env) {
+    if ($env == 'all' || in_array($app->environment(), $env)) {
         $app->register($provider);
     }
 }

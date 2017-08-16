@@ -53,4 +53,44 @@ return [
     */
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Register Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | Here we will register all of the application's service providers which
+    | are used to bind services into the container. Service providers are
+    | totally optional, so you are not required to uncomment this line.
+    |
+    */
+
+    'providers' => [
+        // App\Providers\AppServiceProvider::class => 'all',
+        // App\Providers\AuthServiceProvider::class =>  'all',
+        // App\Providers\EventServiceProvider::class => 'all',
+
+        Barryvdh\Cors\ServiceProvider::class => 'all',
+        Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class => ['development', 'local'],
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Register Middleware
+    |--------------------------------------------------------------------------
+    |
+    | Next, we will register the middleware with the application. These can
+    | be global middleware that run before and after each request into a
+    | route or middleware that'll be assigned to some specific routes.
+    |
+    */
+
+    'middlwares' => [
+        // App\Http\Middleware\ExampleMiddleware::class
+        Barryvdh\Cors\HandleCors::class,
+    ],
+
+    'routeMiddlewares' => [
+        // 'auth' => App\Http\Middleware\Authenticate::class,
+    ],
 ];
