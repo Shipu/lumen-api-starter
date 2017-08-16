@@ -23,6 +23,28 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+/*
+|--------------------------------------------------------------------------
+| Load Config Files
+|--------------------------------------------------------------------------
+|
+| Here we will load the config files for the application.
+|
+*/
+
+foreach ([
+    'app',
+    // 'auth',
+    // 'broadcasting',
+    // 'cache',
+    // 'cors,'
+    // 'database',
+    // 'queue',
+    // 'view',
+] as $file) {
+    $app->configure($file);
+}
+
 // $app->withFacades();
 
 // $app->withEloquent();
@@ -59,9 +81,10 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+   // App\Http\Middleware\ExampleMiddleware::class
+    Barryvdh\Cors\HandleCors::class,
+]);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
@@ -78,9 +101,22 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+foreach ([
+    // App\Providers\AppServiceProvider::class,
+    // App\Providers\AuthServiceProvider::class,
+    // App\Providers\EventServiceProvider::class,
+    Barryvdh\Cors\ServiceProvider::class,
+] as $provider) {
+    $app->register($provider);
+}
+
+if (in_array($app->environment(), ['development', 'local'])) {
+    foreach ([
+        Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class
+    ] as $provider) {
+        $app->register($provider);
+    }
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +130,7 @@ $app->singleton(
 */
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/api.php';
 });
 
 return $app;

@@ -11,6 +11,11 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+$app->group(['prefix' => 'api'], function () use ($app) {
+    $app->get('/', function () use ($app) {
+        return [
+            "app" => config('app.name'),
+            "version" => config('app.version'),
+        ];
+    });
 });
