@@ -18,6 +18,10 @@ $app->group(['prefix' => 'api'], function () use ($app) {
             "version" => config('app.version'),
         ];
     });
+
+    $app->post('/auth', 'AuthController@login');
+    $app->put('/auth', 'AuthController@refresh');
+    $app->patch('/auth', 'AuthController@refresh');
 });
 
 $app->group(['prefix' => 'api', 'middleware' => 'jwt.auth'], function () use ($app) {
@@ -27,4 +31,7 @@ $app->group(['prefix' => 'api', 'middleware' => 'jwt.auth'], function () use ($a
             "version" => config('app.version'),
         ];
     });
+
+    $app->delete('/auth', 'AuthController@logout');
+    $app->get('/user', 'AuthController@currentUser');
 });

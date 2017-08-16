@@ -1,11 +1,21 @@
 <?php
 
+use App\Exceptions;
+use Illuminate\Validation;
+use Symfony\Component\HttpKernel\Exception;
+
 return [
-    Illuminate\Validation\ValidationException::class
-        => App\Exceptions\Handlers\ValidationHandler::class,
+    Validation\ValidationException::class
+        => Handlers\ValidationHandler::class,
 
-    Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException::class
-        => App\Exceptions\Handlers\UnauthorizedHandler::class,
+    Exception\UnauthorizedHttpException::class
+        => Handlers\UnauthorizedHandler::class,
 
-    "*" => App\Exceptions\Handlers\WhoopsHandler::class,
+    Exception\MethodNotAllowedHttpException::class
+        => Handlers\MethodNotAllowedHandler::class,
+
+    Exception\HttpException::class
+        => Handlers\HttpHandler::class,
+
+    "*" => Handlers\WhoopsHandler::class,
 ];

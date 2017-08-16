@@ -2,9 +2,9 @@
 
 namespace App\Exceptions\Handlers;
 
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
-class UnauthorizedHandler extends BaseHandler
+class MethodNotAllowedHandler extends BaseHandler
 {
     /**
      * Handle the exception.
@@ -16,7 +16,7 @@ class UnauthorizedHandler extends BaseHandler
         return response()->json([
             'errors' => [
                 'status' => $this->exception->getStatusCode(),
-                'title' => $this->exception->getMessage() ?: "Unauthorized",
+                'title' => $this->exception->getMessage() ?: "Invalid HTTP method",
             ],
         ], $this->exception->getStatusCode());
     }
@@ -26,6 +26,6 @@ class UnauthorizedHandler extends BaseHandler
      */
     protected function isCatchable()
     {
-        return $this->exception instanceof UnauthorizedHttpException;
+        return $this->exception instanceof MethodNotAllowedHttpException;
     }
 }
