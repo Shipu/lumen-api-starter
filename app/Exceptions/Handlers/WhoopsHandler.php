@@ -3,7 +3,9 @@
 namespace App\Exceptions\Handlers;
 
 use Whoops\Run;
+use ErrorException;
 use Whoops\Handler\PrettyPageHandler;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class WhoopsHandler extends BaseHandler
 {
@@ -34,6 +36,14 @@ class WhoopsHandler extends BaseHandler
      */
     private function isFatalError()
     {
-        return $this->exception->getStatusCode() >= 500;
+        if (! method_exists($this->exception, 'getStatusCode')) {
+            return true;
+        }
+
+        if ($this->exception->getStatusCode() >= 500) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -38,7 +38,7 @@ foreach ([
     // 'broadcasting',
     // 'cache',
     // 'cors,'
-    // 'database',
+    'database',
     "exceptions",
     // 'queue',
     // 'view',
@@ -48,7 +48,7 @@ foreach ([
 
 // $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
