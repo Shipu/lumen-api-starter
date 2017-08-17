@@ -32,10 +32,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
-        ]);
 
         $token = $this->auth->authenticate($request->only('email', 'password'));
 

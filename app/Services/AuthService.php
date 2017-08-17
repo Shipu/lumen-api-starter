@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Tymon\JWTAuth\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Validation\Validator;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -53,6 +54,11 @@ class AuthService extends BaseService
      */
     public function authenticate(array $credentials)
     {
+        $this->validate($credentials, [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
         if (! $token = $this->auth->attempt($credentials)) {
             throw new UnauthorizedHttpException(401, 'Invalid credentials');
         }
