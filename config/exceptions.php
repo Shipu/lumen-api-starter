@@ -1,6 +1,6 @@
 <?php
 
-use App\Exceptions;
+use App\Exceptions\Handlers;
 use Illuminate\Validation;
 use Symfony\Component\HttpKernel\Exception;
 
